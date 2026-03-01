@@ -11,8 +11,8 @@ interface Track {
 }
 
 const TRACKS: Track[] = [
-  { title: "Ai Ngoài Anh",   artist: "Sơn Tùng M-TP",  src: "/audio/Ai Ngoài Anh.mp3",   cover: "/images/1.jpg" },
-  { title: "Có Đôi Điều",    artist: "Tăng Duy Tân",   src: "/audio/Có Đôi Điều.mp3",    cover: "/images/2.jpg" },
+  { title: "Ai Ngoài Anh",   artist: "VSTRA",  src: "/audio/Ai Ngoài Anh.mp3",   cover: "/images/1.jpg" },
+  { title: "Có Đôi Điều",    artist: "Shiki",   src: "/audio/Có Đôi Điều.mp3",    cover: "/images/2.jpg" },
   { title: "Nơi Này Có Anh", artist: "Sơn Tùng M-TP",  src: "/audio/Nơi Này Có Anh.mp3", cover: "/images/3.jpg" },
 ];
 
