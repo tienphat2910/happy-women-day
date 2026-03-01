@@ -1,26 +1,168 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fce4ec;
+  --foreground: #4a1c2e;
+  --pink-light: #fce4ec;
+  --pink-soft: #f8bbd0;
+  --pink-medium: #f48fb1;
+  --pink-deep: #e91e8c;
+  --rose: #e57373;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-lora: var(--font-lora);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  min-height: 100vh;
 }
+
+/* ── Falling petals ── */
+@keyframes petal-fall {
+  0% {
+    transform: translateY(-20px) translateX(0px) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(50vh) translateX(30px) rotate(180deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(105vh) translateX(-20px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.petal {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  animation: petal-fall linear infinite;
+}
+
+/* ── Infinite scroll strips ── */
+@keyframes scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes scroll-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.scroll-left  { animation: scroll-left  linear infinite; will-change: transform; }
+.scroll-right { animation: scroll-right linear infinite; will-change: transform; }
+
+/* ── Ticker text (duplicate-track marquee) ── */
+@keyframes ticker-l {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes ticker-r {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.ticker-left  { animation: ticker-l 16s linear infinite; will-change: transform; }
+.ticker-right { animation: ticker-r 16s linear infinite; will-change: transform; }
+
+/* ── Letter paragraph reveal ── */
+@keyframes para-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.para-reveal {
+  opacity: 0;
+  animation: para-in 0.7s ease forwards;
+}
+
+/* ── Gift flower bloom ── */
+@keyframes bloom-in {
+  0%   { transform: scale(0) rotate(-30deg); opacity: 0; }
+  60%  { transform: scale(1.15) rotate(5deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+@keyframes float-up {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+.bloom       { animation: bloom-in 0.8s cubic-bezier(.34,1.56,.64,1) forwards; }
+.float       { animation: float-up 3s ease-in-out infinite; }
+
+/* ── PIN dots pulse ── */
+@keyframes dot-fill {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+.dot-filled { animation: dot-fill 0.2s ease; }
+
+/* ── Modal fade ── */
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(0.94) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.modal-enter { animation: modal-in 0.3s ease forwards; }
+
+/* ── Unlock slide ── */
+@keyframes slide-out-left {
+  from { transform: translateX(0); opacity: 1; }
+  to   { transform: translateX(-60px); opacity: 0; }
+}
+@keyframes slide-in-right {
+  from { transform: translateX(60px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+.slide-out { animation: slide-out-left 0.4s ease forwards; }
+.slide-in  { animation: slide-in-right 0.4s ease forwards; }
+
+/* ── PIN shake ── */
+@keyframes wiggle {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-8px); }
+  40%      { transform: translateX(8px); }
+  60%      { transform: translateX(-6px); }
+  80%      { transform: translateX(6px); }
+}
+.shake { animation: wiggle 0.5s ease; }
+
+/* ── Loading dot bounce ── */
+@keyframes bounce-dot {
+  0%, 80%, 100% { transform: translateY(0);    opacity: 0.4; }
+  40%           { transform: translateY(-8px);  opacity: 1; }
+}
+
+/* ── Progress bar ── */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 4px;
+  background: #f8bbd0;
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #e91e8c;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  border-radius: 4px;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #fce4ec; }
+::-webkit-scrollbar-thumb { background: #f48fb1; border-radius: 3px; }
